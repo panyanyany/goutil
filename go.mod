@@ -1,4 +1,4 @@
-module goutil
+module github.com/panyanyany/goutil
 
 go 1.16
 
