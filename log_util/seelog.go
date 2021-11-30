@@ -38,7 +38,7 @@ func createIpFormatter(params string) seelog.FormatterFunc {
 	}
 }
 
-func SetupSeelog() {
+func SetupSeelog(configDir string) {
 	var err error
 	// custom formatter，显示进程名
 	err = seelog.RegisterCustomFormatter("Process", createProcessFormatter)
@@ -54,7 +54,7 @@ func SetupSeelog() {
 		panic(err)
 	}
 	// seelog配置，用于输出调试信息
-	logger, err := seelog.LoggerFromConfigAsFile("配置/seelog.xml")
+	logger, err := seelog.LoggerFromConfigAsFile(configDir)
 	if err != nil {
 		panic(err)
 	}
