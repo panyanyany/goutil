@@ -5,9 +5,8 @@ import (
 	"os"
 	"path"
 
-	"txadgo2/util/ip_util"
-
 	"github.com/cihub/seelog"
+	"github.com/panyanyany/goutil/ip_util"
 )
 
 // custom formatter，显示进程名
