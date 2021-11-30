@@ -8,9 +8,25 @@ import (
 	"gorm.io/gorm"
 )
 
-func InitDb(name, username, pass string, models []interface{}) *gorm.DB {
+type MysqlConfig struct {
+	Name string
+	User string
+	Pass string
+	Host string
+}
 
-	db, err := gorm.Open(mysql.Open(fmt.Sprintf("%s:%s@tcp(localhost:3306)/%s?charset=utf8mb4&parseTime=True&loc=Local", username, pass, name)), &gorm.Config{})
+func InitDb(cfg MysqlConfig, models []interface{}) *gorm.DB {
+	if cfg.Host == "" {
+		cfg.Host = "127.0.0.1"
+	}
+
+	db, err := gorm.Open(mysql.Open(fmt.Sprintf(
+		"%s:%s@tcp(%s:3306)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		cfg.User,
+		cfg.Pass,
+		cfg.Host,
+		cfg.Name,
+	)), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
